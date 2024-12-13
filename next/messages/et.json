@@ -1,0 +1,36 @@
+{
+    "Home": {
+        "title": "Tere tulemast dünaamiliste tabelite maailma",
+        "documents": "Documentid",
+        "headerTitle": {
+            "index": "Indeks",
+            "state": "Staatus",
+            "id": "ID",
+            "documentName": "Dokumendi nimi",
+            "documentDate": "Dokumendi kuupäev",
+            "stateTime": "Staatuse aeg",
+            "documentNumber": "Dokumendi number",
+            "documentTotalAmount": "Dokumendi kogusumma",
+            "settings": "Seaded"
+        },
+        "document": {
+            "state": {
+                "SUBMITTED": "Esitatud",
+                "IN_PROCESS": "Töötlemisel",
+                "ADDITIONAL_REVIEW": "Täiendav läbivaatus",
+                "REVIEW_COMPLETED": "Läbivaatus lõpetatud",
+                "INVALID": "Kehtetu"
+            }
+        }
+    },
+    "Service": {
+        "ready": "Laaditud",
+        "loading": "Laadimine",
+        "nothing_found": "Pole midagi leitud",
+        "save": "SALVESTA",
+        "edit": "MUUDA",
+        "close": "KINNI",
+        "new_document": "UUS DOKUMENT",
+        "delete": "KUSTUTA"
+    }
+}

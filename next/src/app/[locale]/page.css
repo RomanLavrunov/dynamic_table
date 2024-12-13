@@ -1,0 +1,41 @@
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;         
+  }
+  
+  .main-container a {
+    padding: 10px
+  }
+  .main-link {
+    font-size: larger;
+    background: rgb(224, 230, 232);
+    size: 100px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .main-link:hover, .link-container a:hover {
+    color: rgb(25, 22, 10);
+    background: rgb(250, 227, 109);
+    transition: background-color 200ms linear;
+    border-radius: 10px;
+  }
+
+  .main-container{
+    padding: 20px;
+  }
+
+  .link-container {
+    padding: 20px;
+  }
+ 
+  .main-title{
+    padding: 20px;
+  }
+ 
+ 
+ 

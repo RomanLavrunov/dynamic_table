@@ -1,0 +1,103 @@
+  .edit-form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+  }
+
+  .edit-form-document-id {
+      font-size: 18px;
+      font-weight: bold;
+  }
+
+  .edit-form-button-container button {
+      margin-left: 8px;
+      padding: 5px 10px;
+      font-size: 14px;
+  }
+
+  .edit-form-edit-button {
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+  }
+
+  .edit-form-save-button--disabled {
+      background-color: #b4b4b4;
+      border: none;
+      border-radius: 4px;
+  }
+
+  .edit-form-save-button {
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+  }
+
+  .edit-form-close-button {
+      cursor: pointer;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 4px;
+  }
+
+  .edit-form-delete-button {
+      cursor: pointer;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      width: 6rem;
+      padding: 5px 10px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 4px;
+  }
+
+  .edit-form-content {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .edit-form-details p {
+      margin: 8px 0;
+  }
+
+  .edit-form-form label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+  }
+
+  .edit-form-form input,
+  .edit-form-form textarea,
+  .edit-form-form select {
+      margin-top: 4px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+  }
+
+  .edit-form-background--visible {
+      height: 100vh;
+      width: 100vw;
+      position: absolute;
+      background: rgba(255, 255, 255, 0.442);
+  }
+
+  .modal-background--hidden {
+      display: none;
+  }
+
+  .delete-button-container {
+      cursor: pointer;
+      display: flex;
+      justify-content: flex-end;
+
+  }

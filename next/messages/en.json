@@ -1,0 +1,37 @@
+{
+    "Home": {
+        "title":"Welcome to the world of the dynamic tables",
+        "documents": "Documents",
+        "headerTitle": {
+            "index": "Index",
+            "state": "State",
+            "id": "ID",
+            "documentName": "Document Name",
+            "documentDate": "Document Date",
+            "stateTime": "State Time",
+            "documentNumber": "Document Number",
+            "documentTotalAmount": "Document Total Amount",
+            "settings": "Settings"
+        },
+        "document": {
+            "state": {
+                "SUBMITTED": "Submitted",
+                "IN_PROCESS": "In process",
+                "ADDITIONAL_REVIEW": "Additional Review",
+                "REVIEW_COMPLETED": "Review Complted",
+                "INVALID": "Invalid",
+                "UNKNOWN": "Unknown"
+            }
+        }
+    },
+    "Service":{
+        "ready":"Ready",
+        "loading":"Loading",
+        "nothing_found":"Nothing found",
+        "save":"SAVE",
+        "edit":"EDIT",
+        "close":"CLOSE",
+        "new_document":"NEW DOCUMENT",
+        "delete":"DELETE"
+    }
+}

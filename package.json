@@ -1,0 +1,6 @@
+{
+    "scripts": {
+      "start": "concurrently \"npm run start --prefix express\" \"npm run dev --prefix next_js_app\""
+    }
+  }
+  

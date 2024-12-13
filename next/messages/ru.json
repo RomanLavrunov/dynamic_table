@@ -1,0 +1,36 @@
+{
+    "Home": {
+        "title":"Добро пожаловать в мир динамических таблиц",
+        "documents": "Документы",
+        "headerTitle": {
+            "index": "Индекс",
+            "state": "Статус",
+            "id": "ID",
+            "documentName": "Название документа",
+            "documentDate": "Дата документа",
+            "stateTime": "Время статуса",
+            "documentNumber": "Номер документа",
+            "documentTotalAmount": "Общая сумма документа",
+            "settings": "Настройки"
+        },
+        "document": {
+            "state": {
+                "SUBMITTED": "Отправлено",
+                "IN_PROCESS": "В процессе",
+                "ADDITIONAL_REVIEW": "Доп. проверка",
+                "REVIEW_COMPLETED": "Проверка завершена",
+                "INVALID": "Недействительно"
+            }
+        }
+    },
+    "Service":{
+        "ready":"Готово",
+        "loading":"Загрузка",
+        "nothing_found":"Ничего не найдено",
+        "save": "СОХРАНИТЬ",
+        "edit": "ИЗМЕНИТЬ",
+        "close": "ЗАКРЫТЬ",
+        "new_document": "НОВЫЙ ДОКУМЕНТ",
+        "delete": "УДАЛИТЬ"
+    }
+}

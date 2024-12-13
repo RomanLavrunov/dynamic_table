@@ -1,0 +1,10 @@
+.missing-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.missing-data-message {
+    padding: 20px 0;
+    font-size: larger;
+}
