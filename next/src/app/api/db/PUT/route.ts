@@ -6,7 +6,7 @@ export async function PUT(request:NextRequest) {
         const { document } = await request.json();
         const {id, state, documentTotalAmount, stateTime} = document as IDocument;
 
-        const expressResponse = await fetch(`http://localhost:4000/documents/${id}`, {
+        const expressResponse = await fetch(`${process.env.SERVER_API_URL}${id}`, {
             cache: "no-cache",
             method: 'PUT',
             headers: {
@@ -24,7 +24,6 @@ export async function PUT(request:NextRequest) {
             );
         }
         const expressData = await expressResponse.json();
-        console.log(expressData.document.stateTime)
 
         return NextResponse.json(
             { data: expressData.document, success: true, message: "Update successful" },

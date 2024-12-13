@@ -1,108 +1,130 @@
 'use client'
-import { useTranslations } from 'next-intl';
 import './page.css';
-import React, { useRef } from 'react';
-import { useStream } from '../../components/useStreamData';
-import eventEmitter from '../../../shared/utilities/emitters/EventEmitter';
-import { shiftArrayCoordinates } from '../../../shared/utilities/shiftArrayCoordinates'
-import { MissingTable } from '../../components/MissingTable/MissingTable';
-import { useVisibility } from '../../hooks/useVisibility';
+import { useMemo, useRef, useState } from 'react';
 import TableHeader from '../../components/TableHeader/TableHeader';
 import TableRow from '../../components/TableRow/TableRow';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import Spinner from '../../components/Spinner/Spinner';
 import Image from 'next/image';
-import { Link } from '../../../i18n/routing';
+import { Link, routing } from '../../../i18n/routing';
 import returnArrow from '../../../../public/assets/images/icons/return_arrow.svg';
 import { IDocument } from '../../../shared/utilities/dataStorage/data.types';
+import { formatDocumentData } from '../../../shared/utilities/dataStorage/formatDocumentData';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import { useData } from './useData';
+import { useVisibility } from '../../hooks/useVisibility';
+import { SearchSortQuery } from '../../../shared/utilities/sort/sort.types';
+import eventEmitter from '../../../shared/utilities/emitters/EventEmitter';
+import { CreateDocumentForm } from '../../components/CreateDocumentForm/CreatDocumentForm';
+import { useModal } from '../../components/Modal/ModalContext';
+import { useTranslations } from 'next-intl';
+import Spinner from '../../components/Spinner/Spinner';
 
 
-const headers = ["index", "state", "id", "documentName", "documentDate", "stateTime", "documentNumber", "documentTotalAmount","settings"] as (keyof IDocument)[];
+const headers = ["index", "state", "id", "documentName", "documentDate", "stateTime", "documentNumber", "documentTotalAmount", "settings"] as (keyof IDocument)[];
 const shiftStep: number = 40;
 
-export default function Table() {
-  const { data, ready, currentCoordinates, documentAmount } = useStream();
-  const t = useTranslations("Service");
-  const mainContainerRef = useRef<HTMLDivElement | null>(null);
+const Server = () => {
+    const { document, data, documentsAmount } = useData()
+    const mainContainerRef = useRef<HTMLDivElement | null>(null);
+    const formattedData = useMemo(() => {return formatDocumentData(data)}, [data])
+    const t = useTranslations('Service');
+    const [searchQuery, setSearchQuery] = useState<SearchSortQuery>({ offset: 0 });
+    const locales = routing.locales;
+ 
+    const firstIndex = 10;
+    const lastIndex = data?.length - 40;
 
-  const firstIndex = 10;
-  const lastIndex = data.length - 11;
+    const firstElementRef = useVisibility((isVisible: boolean) => {
+        if (isVisible) {
+            if (searchQuery.offset === 0) return;
+            if (mainContainerRef.current) {
+                const newShiftStep = -shiftStep;
 
-  const firstElementRef = useVisibility((isVisible: boolean) => {
-    if (isVisible) {
-      if (currentCoordinates.start === 0) return;
-      if (mainContainerRef.current) {
-        mainContainerRef.current.scrollTo({
-          top: 1500,
-          left: 0,
-        });
-        const newShiftStep = -shiftStep;
+                setSearchQuery((prevQuery) => {
+                    const updatedQuery = {
+                      offset: Math.max(0, prevQuery.offset + newShiftStep)
+                    }
+                    eventEmitter.emit('updateSearchQuery', updatedQuery);
+                    return updatedQuery;
+                  });
+                mainContainerRef.current.scrollTo({
+                    top: 2500,
+                    left: 0,
+                });
+            }
+        }
+    }, [searchQuery.offset])
 
-        const newCoordinates = shiftArrayCoordinates({ currentCoordinates, parentArrayLength: documentAmount, shiftStep: newShiftStep })
-        eventEmitter.emit('sendCurrentCoordinates', newCoordinates);
-      }
+
+    const lastElementRef = useVisibility((isVisible: boolean) => {
+        if (isVisible) {
+            if (searchQuery.offset === documentsAmount - shiftStep) return;
+            if (mainContainerRef.current) {
+                setSearchQuery((prevQuery) => {
+                    const updatedQuery = {
+                      offset: Math.max(0, prevQuery.offset + shiftStep)
+                    }
+                    eventEmitter.emit('updateSearchQuery', updatedQuery);
+                    return updatedQuery;
+                  });
+                  mainContainerRef.current.scrollTop = Math.max(
+                    mainContainerRef.current.scrollTop * 0.7,
+                    0
+                  );
+            }
+        }
+    }, [searchQuery.offset, documentsAmount])
+
+    const refCheck = {
+        [firstIndex]: firstElementRef,
+        [lastIndex]: lastElementRef,
+    };
+
+    const { openModal } = useModal();
+   
+    const openCreateDocumentform = () => {
+        openModal(<CreateDocumentForm />);
     }
-  }, [currentCoordinates])
 
-  const lastElementRef = useVisibility((isVisible: boolean) => {
-    if (isVisible) {
-      if (currentCoordinates.end === documentAmount - 1) return;
-      if (mainContainerRef.current) {
-        mainContainerRef.current.scrollTop = Math.max(
-          mainContainerRef.current.scrollTop * 0.7,
-          0
-        );
-
-        const newCoordinates = shiftArrayCoordinates({ currentCoordinates, parentArrayLength: documentAmount, shiftStep })
-        eventEmitter.emit('sendCurrentCoordinates', newCoordinates);
-      }
-    }
-  }, [currentCoordinates])
-
-  const refCheck = {
-    [firstIndex]: firstElementRef,
-    [lastIndex]: lastElementRef,
-  };
 
   const missingTableRender = () => {
-    if (!data.length && !ready) return <Spinner />
-    if (!data.length && ready) return <MissingTable />
+    if (documentsAmount <= 0) return <Spinner />
+    //if (!data.length && ready) return <MissingTable />
   }
 
-  return (
-    <div className='table-container' ref={mainContainerRef} >
-      <div className='sticky-header'>
-        <nav className='nav-bar'>
-          <Link className='nav-link' href={'/'}>
-            <Image src={returnArrow} alt="return arrow" />
-          </Link>
-          <Link className='nav-link' href={'/documents'} locale="en">EN</Link>
-          <Link className='nav-link' href={'/documents'} locale="ru">RU</Link>
-          <Link className='nav-link' href={'/documents'} locale="et">ET</Link>
-        </nav>
-        <p className='progress-track' style={{ margin: 20 }}>{ready ? t(`ready`) : (<span className="dots">{t(`loading`)}</span>)}</p>
-        <SearchBar />
-      </div>
-      <table>
-        <thead>
-          <TableHeader />
-        </thead>
-        <tbody style={{ width: '100vw' }}>
-          {missingTableRender()}
-          {data.map((document, i) => (
-            document && document.id ? (
-              <TableRow
-                key={document.id}
-                document={document}
-                index={i}
-                headers={headers}
-                coordinatePoint={currentCoordinates.start}
-                ref={refCheck[i] || null}
-              />
-            ) : null))}
-        </tbody>
-      </table>
-    </div >
-  );
-}
+  
+    return (
+        <div className='table-container' ref={mainContainerRef}>
+            <div className='sticky-header'>
+                <nav className='nav-bar'>
+                    <Link className='nav-link' href={'/'}>
+                        <Image src={returnArrow} alt="return arrow" />
+                    </Link>
+                    {locales.map((locale) => (<Link className='nav-link' key={locale} href={'/documents'} locale={locale}>{locale.toUpperCase()}</Link>))}
+                </nav>
+                <button className="add-new-document-button" onClick={()=>openCreateDocumentform()}>{t('new_document')}</button>
+                <SearchBar />
+            </div>
+            <table>
+                <thead>
+                    <TableHeader />
+                </thead>
+                <tbody style={{ width: '100vw' }}>
+                    {missingTableRender()}
+                    {formattedData?.map((document, i) => (
+                        document && document.id ? (
+                            <TableRow
+                                key={document.id}
+                                document={document}
+                                index={i}
+                                headers={headers}
+                                coordinatePoint={searchQuery.offset}
+                                ref={refCheck[i] || null}
+                            />
+                        ) : null))}
+                </tbody>
+            </table>
+        </div >
+    );
 
+}
+export default Server;

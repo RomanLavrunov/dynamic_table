@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
     try {
-        const expressResponse = await fetch("http://localhost:4000/documents/next-document", { cache: "no-cache" });
+        const expressResponse = await fetch(`${process.env.SERVER_API_URL_GET_NEXT_ID}`, { cache: "no-cache" });
         
         if (!expressResponse.ok) {
             console.error("Failed to fetch next ID");

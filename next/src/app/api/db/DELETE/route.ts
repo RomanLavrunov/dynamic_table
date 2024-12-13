@@ -5,7 +5,7 @@ export async function DELETE(request: NextRequest) {
       const {searchParams} = new URL(request.url); 
       const id = searchParams.get('id');
   
-      const expressResponse = await fetch(`http://localhost:4000/documents/${id}`, {
+      const expressResponse = await fetch(`${process.env.SERVER_API_URL}${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

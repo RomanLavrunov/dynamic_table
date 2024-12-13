@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 export const urlConfig = {
     "100K": process.env.API_URL_100K,

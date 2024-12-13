@@ -38,36 +38,18 @@ export const useData = () => {
     };
 
     useEffect(() => {
+
         eventEmitter.on('updateSearchQuery', (searchQuery: SearchSortQuery) => setSearchQuery((prev) => { return { ...prev, ...searchQuery } }))
+        eventEmitter.on('sendSearchValue', (searchText: string) => setSearchQuery((prev) => { return { ...prev, searchText} }))
+        eventEmitter.on('deleteDocumentOnServer', handleDocumentDelete);
+        eventEmitter.on('updateDocumentOnServer', handleDocumentUpdate);
+        eventEmitter.on('addDocumentOnServer', handlePostDocument);
+       
         return () => {
             eventEmitter.unsubscribe("updateSearchQuery");
-        };
-    }, []);
-
-    useEffect(() => {
-        eventEmitter.on('sendSearchValue', (searchText: string) => setSearchQuery((prev) => { return { ...prev, searchText} }))
-        return () => {
-            eventEmitter.unsubscribe('sendSearchValue');
-        };
-    }, []);
-
-    useEffect(() => {
-        eventEmitter.on('updateDocumentOnServer', handleDocumentUpdate);
-        return () => {
-            eventEmitter.unsubscribe('updateDocumentOnServer');
-        };
-    }, []);
-
-    useEffect(() => {
-        eventEmitter.on('deleteDocumentOnServer', handleDocumentDelete);
-        return () => {
             eventEmitter.unsubscribe('deleteDocumentOnServer');
-        };
-    }, []);
-
-    useEffect(() => {
-        eventEmitter.on('addDocumentOnServer', handlePostDocument);
-        return () => {
+            eventEmitter.unsubscribe('sendSearchValue');
+            eventEmitter.unsubscribe('updateDocumentOnServer');
             eventEmitter.unsubscribe('addDocumentOnServer');
         };
     }, []);

@@ -5,7 +5,7 @@ export async function POST(request:NextRequest) {
     try {
         const {postDocument} = await request.json();
 
-        const expressResponse = await fetch('http://localhost:4000/documents/', {
+        const expressResponse = await fetch(`${process.env.SERVER_API_URL}`, {
             cache: "no-cache",
             method: 'POST',
             headers: {

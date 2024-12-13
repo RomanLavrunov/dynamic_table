@@ -1,4 +1,5 @@
-import { FilterParams, FilterStateParams, Locale, translationsMap } from "./filtering.types";
+import { Locale } from "../indexing/indexing.types";
+import { FilterParams, FilterStateParams, translationsMap } from "./filtering.types";
 
 export const getStateIndexes = ({ indexedMap, searchValue }: FilterParams) => {
 

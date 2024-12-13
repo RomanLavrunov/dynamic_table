@@ -10,10 +10,7 @@ export default function Home() {
     <div className="main-container">
       <h1 className="main-title">{t('title')}</h1>
       <div className="main-link">
-        <Link href={'/documents'} >{t('documents')}</Link>
-      </div>
-      <div className="main-link">
-        <Link href={'/server'}>Server</Link>
+        <Link href={'/documents'}>{t('documents')}</Link>
       </div>
       <div className="link-container">
         <Link href={'/'} locale="en">EN</Link>

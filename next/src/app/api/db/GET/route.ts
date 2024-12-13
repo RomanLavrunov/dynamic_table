@@ -4,12 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
 
-    const dataUrl = searchParams
-        ? `http://localhost:4000/documents?${searchParams}`
-        : 'http://localhost:4000/documents';
-
     try {
-        const response = await fetch(dataUrl, { cache: 'no-cache' });
+        const response = await fetch(`${process.env.SERVER_API_URL}?${searchParams || ''}`, { cache: 'no-cache' });
         if (!response.ok) {
             console.error(`Failed to fetch documents: ${response.status} ${response.statusText}`);
             return NextResponse.json({

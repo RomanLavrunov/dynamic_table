@@ -93,13 +93,13 @@ documentsRouter.post('/', async (req, res) => {
     console.log('Inserting document with ID:', id);
 
     await db('documents').insert({
-      id: id,
-      state: state,
-      stateTime: stateTime,
-      documentNumber: documentNumber,
-      documentName: documentName,
-      documentDate: documentDate,
-      documentTotalAmount: documentTotalAmount,
+      id,
+      state,
+      stateTime,
+      documentNumber,
+      documentName,
+      documentDate,
+      documentTotalAmount,
       version: 0,
       isDeleted: 0,
     });

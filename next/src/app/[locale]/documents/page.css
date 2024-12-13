@@ -1,4 +1,5 @@
-.table-header, .table-cell {
+.table-header,
+.table-cell {
   padding: 10px;
 }
 
@@ -7,8 +8,8 @@
 }
 
 .table-header {
-  width:100vw;
-  cursor: pointer; 
+  width: 100vw;
+  cursor: pointer;
   position: sticky;
   top: 0;
   background-color: white;
@@ -24,7 +25,7 @@
 
 .sticky-header {
   height: 60px;
-  display:flex;
+  display: flex;
   align-items: center;
   position: sticky;
   top: 0;
@@ -33,10 +34,10 @@
 }
 
 
-.table-header-properties{
- height: 1rem;
- display: flex;
- flex-direction: row;
+.table-header-properties {
+  height: 1rem;
+  display: flex;
+  flex-direction: row;
 }
 
 .table-container {
@@ -46,15 +47,15 @@
 
 }
 
-.table-cell{
+.table-cell {
   text-align: center;
 }
 
-.arrow-down{
-  transform:rotate(180deg)
+.arrow-down {
+  transform: rotate(180deg)
 }
 
-.toolbar{
+.toolbar {
   padding: 20px;
   width: 100wv;
   background-color: white;
@@ -73,7 +74,7 @@
 }
 
 .stream {
-  top:60px;
+  top: 60px;
 }
 
 .dots::after {
@@ -84,21 +85,40 @@
   animation: dots 1.5s steps(4, end) infinite;
 }
 
+.add-new-document-button {
+  cursor: pointer;
+  height: 2rem;
+  white-space: nowrap;
+  padding: 5px 10px;
+  background-color: #007bff;
+  width: auto;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+
 @keyframes dots {
-  0%, 20% {
-      content: '';
+
+  0%,
+  20% {
+    content: '';
   }
+
   40% {
-      content: '.';
+    content: '.';
   }
+
   60% {
-      content: '..';
+    content: '..';
   }
-  80%, 100% {
-      content: '...';
+
+  80%,
+  100% {
+    content: '...';
   }
 }
 
-.progress-track{
- min-width: 100px;
+.progress-track {
+  min-width: 100px;
 }

@@ -62,8 +62,6 @@ export const EditDocumentForm = ({ document }) => {
         closeModal();
     }
 
-    console.log(isSubmitDisabled);
-
     return (
         <div className='edit-form'>
             <div className='edit-form-header'>
