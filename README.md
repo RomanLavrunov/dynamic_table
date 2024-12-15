@@ -2,6 +2,7 @@
 Dynamic Table Server is a project that dynamically loads data from the server in limited amounts. As the user scrolls, additional data is fetched from the bottom, and excess data is removed from the top, ensuring the interface is not overloaded. The project also includes sorting, basic search (currently in progress for full multilingual support), and functionalities for modifying, deleting, and adding documents from the client. File locking (to prevent editing the same document by multiple users simultaneously) is planned for future updates.
 
 ##Features
+
  -Dynamic Data Loading: Loads data in small chunks, with additional data fetching as the user scrolls. 
  
  -Sorting: Allows sorting by different table columns.
@@ -130,6 +131,7 @@ In previous iterations of the project, test cases were implemented, but there ar
 This project does not currently have a license. If you would like to include a license, consider using an open-source license like MIT. You can generate one using online tools such as choosealicense.com.
 
 ##Additional Information
+
 -Docker Configuration: Docker configuration is included in the project, but it may require adjustments based on your environment and requirements.
 
 -Database Setup: Make sure that your MySQL server is properly set up and configured for the project. You may need to adjust environment variables for database access.
