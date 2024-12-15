@@ -2,11 +2,16 @@
 Dynamic Table Server is a project that dynamically loads data from the server in limited amounts. As the user scrolls, additional data is fetched from the bottom, and excess data is removed from the top, ensuring the interface is not overloaded. The project also includes sorting, basic search (currently in progress for full multilingual support), and functionalities for modifying, deleting, and adding documents from the client. File locking (to prevent editing the same document by multiple users simultaneously) is planned for future updates.
 
 ##Features
- -Dynamic Data Loading: Loads data in small chunks, with additional data fetching as the user scrolls.
+ -Dynamic Data Loading: Loads data in small chunks, with additional data fetching as the user scrolls. 
+ 
  -Sorting: Allows sorting by different table columns.
+ 
  -Basic Search: Includes search functionality (still in progress with multi-language support).
+ 
  -Document Operations: Modify, delete, and add documents directly from the client-side.
+ 
  -Real-Time Document Interaction: Allows the client and server to interact in real-time.
+ 
  -Future Features: Planned implementation of file locking for simultaneous document editing.
 
 ##Project Structure
