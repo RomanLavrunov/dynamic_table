@@ -131,7 +131,9 @@ This project does not currently have a license. If you would like to include a l
 
 ##Additional Information
 -Docker Configuration: Docker configuration is included in the project, but it may require adjustments based on your environment and requirements.
+
 -Database Setup: Make sure that your MySQL server is properly set up and configured for the project. You may need to adjust environment variables for database access.
+
 -Future Updates: File locking functionality for preventing simultaneous document editing is planned for future releases.
 
 ##How to run both the backend (Express) and frontend (Next.js) using concurrently
