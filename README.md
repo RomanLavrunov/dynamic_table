@@ -91,27 +91,32 @@ Navigate to the Express directory:
 ##Database Schema
 The schema for the documents table is as follows:
 
-javascript
+Database Schema
+Table: documents
 
-export const up = async (knex) => {
-  return knex.schema.createTable('documents', (table) => {
-    table.increments('id').primary();
-    table.string('state').index();
-    table.timestamp('stateTime');
-    table.string('documentNumber').unique();
-    table.string('documentName');
-    table.date('documentDate');
-    table.float('documentTotalAmount');
-    table.float('eligibleAmount');
-    table.integer('version');
-    table.decimal('eligiblePercentage', 5, 2).nullable();
-    table.timestamps(true, true);
-  });
-};
+id: Integer // Unique identifier for the document // Primary Key, Auto-incremented
 
-export const down = async (knex) => {
-  return knex.schema.dropTable('documents');
-};
+state: String // The status of the document // Indexed for faster querying
+
+stateTime: Timestamp // The time when the status of the document was last updated.
+
+documentNumber: String // Unique document number // Unique index
+
+documentName: String // The name of the document
+
+documentDate: Date // The date of the document
+
+documentTotalAmount: Float // The total amount for the document
+
+eligibleAmount: Float // The eligible amount related to the document
+
+version: Integer // The version number of the document
+
+eligiblePercentage: Decimal(5, 2) // The eligible percentage (e.g., 95.00) // Can be NULL
+
+created_at: Timestamp // The date and time when the document was created // Automatically set (true, true)
+
+updated_at: Timestamp // The date and time when the document was last updated // Automatically updated (true, true)
 
 ##Development and Testing
 In previous iterations of the project, test cases were implemented, but there are no tests in the current version of the project. However, the code can easily be extended to include tests in future releases.
