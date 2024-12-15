@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IDocument } from "../../../../shared/utilities/dataStorage/data.types";
+import { IDocument } from "../../../../shared/utilities/dataProcessor/data.types";
 
 export async function POST(request:NextRequest) {
     try {

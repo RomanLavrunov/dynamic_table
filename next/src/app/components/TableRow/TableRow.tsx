@@ -1,4 +1,4 @@
-import { IDocument } from '../../../shared/utilities/dataStorage/data.types'
+import { IDocument } from '../../../shared/utilities/dataProcessor/data.types'
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { forwardRef } from 'react';

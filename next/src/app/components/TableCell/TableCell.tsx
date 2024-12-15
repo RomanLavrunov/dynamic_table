@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { IDocument } from "../../../shared/utilities/dataStorage/data.types";
+import { IDocument } from "../../../shared/utilities/dataProcessor/data.types";
 import eventEmitter from "../../../shared/utilities/emitters/EventEmitter";
 import settings from '../../../../public/assets/images/icons/settings-sharp.svg'
 import Image from 'next/image';

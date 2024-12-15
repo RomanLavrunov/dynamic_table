@@ -1,5 +1,8 @@
 import express from 'express';
 import db from '../db.js';
+import getDocuments from '../shemas/getDocuments.js';
+import putDocuments from '../shemas/putDocument.js';
+import postDocuments from '../shemas/postDocument.js';
 
 const documentsRouter = express.Router();
 
@@ -21,16 +24,19 @@ documentsRouter.get('/next-document', async (req, res) => {
 
 documentsRouter.get('/', async (req, res) => {
 
-  const { tableHeader, isAscending, offset, searchText } = req.query;
+  const dataCountResult = await db('documents').countDistinct('id as count');
+  const dataCount = dataCountResult[0].count;
+
+  const value = getDocuments(dataCount, req.query);
+  const { tableHeader, isAscending, offset, searchText } = value;
+
   const sortByHeader = tableHeader || 'id';
   const direction = isAscending === 'true' ? 'asc' : 'desc';
   const offsetValue = parseInt(offset, 10) || 0;
-
   const searchCondition = searchText ? `%${searchText}%` : null;
 
   try {
     let query = db('documents').select('*').where('isDeleted', false).orderBy(sortByHeader, direction).limit(200).offset(offsetValue);
-
     if (searchCondition) {
       query = query.where('documentName', 'like', searchCondition) 
         .orWhere('documentNumber', 'like', searchCondition)
@@ -38,9 +44,6 @@ documentsRouter.get('/', async (req, res) => {
     }
 
     const documents = await query;
-
-    const dataCountResult = await db('documents').countDistinct('id as count');
-    const dataCount = dataCountResult[0].count;
     res.status(200).json({ dataCount, documents });
   } catch (error) {
     console.error('Error fetching documents:', error.message);
@@ -53,7 +56,8 @@ documentsRouter.get('/', async (req, res) => {
 documentsRouter.put('/:id', async (req, res) => {
 
   const id = req.params.id;
-  const { state, documentTotalAmount, stateTime } = req.body;
+  const value = putDocuments(req.body);
+  const { state, documentTotalAmount, stateTime } = value;
 
   try {
 
@@ -82,7 +86,9 @@ documentsRouter.put('/:id', async (req, res) => {
 
 
 documentsRouter.post('/', async (req, res) => {
-  const { id, state, stateTime, documentNumber, documentName, documentDate, documentTotalAmount } = req.body.postDocument;
+
+  const value = postDocuments(req.body.postDocument);
+  const { id, state, stateTime, documentNumber, documentName, documentDate, documentTotalAmount } = value;
 
   if (!id || typeof id !== 'number') {
     console.error('Invalid or missing ID:', id);

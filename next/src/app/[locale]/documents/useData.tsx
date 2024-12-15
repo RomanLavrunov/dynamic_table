@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import eventEmitter from "../../../shared/utilities/emitters/EventEmitter"
-import { IDocument } from "../../../shared/utilities/dataStorage/data.types";
+import { IDocument } from "../../../shared/utilities/dataProcessor/data.types";
 import { SearchSortQuery } from "../../../shared/utilities/sort/sort.types";
 
 export const useData = () => {

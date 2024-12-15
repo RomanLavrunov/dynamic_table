@@ -2,22 +2,15 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import arrow from '../../../../public/assets/images/icons/arrow.svg';
-import { SearchSortQuery, SortData } from '../../../shared/utilities/sort/sort.types';
+import { SearchSortQuery} from '../../../shared/utilities/sort/sort.types';
 import React from 'react';
-import { IDocument } from '../../../shared/utilities/dataStorage/data.types';
+import { IDocument } from '../../../shared/utilities/dataProcessor/data.types';
 import eventEmitter from '../../../shared/utilities/emitters/EventEmitter';
 
 const headers = ["index", "state", "id", "documentName", "documentDate", "stateTime", "documentNumber", "documentTotalAmount", "settings"] as (keyof IDocument)[];
 
 const TableHeader = () => {
   const t = useTranslations("Home");
-
-  const [sortData, setSortData] = useState<SortData>({
-    tableHeader: 'id',
-    isAscending: true,
-    currentCoordinates: { start: 0, end: 200 },
-  });
-
   const [isDisabled, setIsDisabled] = useState(true);
   const [searchQuery, setSearchQuery] = useState<SearchSortQuery>({ tableHeader: 'id', isAscending: true});
 
@@ -32,7 +25,7 @@ const TableHeader = () => {
       
       return updatedQuery;
     });
-  }, [sortData, searchQuery]);
+  }, [searchQuery]);
 
   useEffect(() => {
     eventEmitter.on('activateSearchFilterOptions', (isLoading) => setIsDisabled(!isLoading));

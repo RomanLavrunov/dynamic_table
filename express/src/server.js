@@ -1,9 +1,7 @@
 import express from 'express';
 import { loadData } from './loadData.js';
-import dotenv from 'dotenv';
+import { config } from './config/config.js';
 import documentsRouter from './routers/documents.js';
-
-dotenv.config({ path: '.env.local' });
 
 const app = express();
 
@@ -26,7 +24,7 @@ const app = express();
 
     app.use('/documents', documentsRouter);
 
-    const PORT = process.env.SERVER_PORT || 4000;
+    const PORT = config.server || 4000;
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);

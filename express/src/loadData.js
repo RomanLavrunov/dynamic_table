@@ -1,12 +1,11 @@
 import { get } from 'https';
 import knex from './db.js';
 import ChunkHandler from '../utils/chunkHandler.js';
-import dotenv from 'dotenv';
+import { urlConfig } from './config/urlConfig.js';
+import { config } from './config/config.js';
 
-dotenv.config({ path: '.env.local' });
-
-const DATA_URL = process.env.API_URL_2M;
-const DATA_TABLE = process.env.DB_NAME;
+const DATA_URL = urlConfig['2M'];
+const DATA_TABLE = config.database;
 
 async function clearTable() {
   await knex(DATA_TABLE).del();

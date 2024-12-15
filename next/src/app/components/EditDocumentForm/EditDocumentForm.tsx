@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { IDocument, DocumentStateType } from '../../../shared/utilities/dataStorage/data.types';
+import { IDocument, DocumentStateType } from '../../../shared/utilities/dataProcessor/data.types';
 import eventEmitter from '../../../shared/utilities/emitters/EventEmitter';
 import { useTranslations } from 'next-intl';
 import { useModal } from '../Modal/ModalContext';
 import './EditDocumentForm.css';
-import { formatToISODate } from '../../../shared/utilities/dataStorage/formatDocumentData';
+import { formatToISODate } from '../../../shared/utilities/dataProcessor/formatDocumentData';
 
 const documentStates = ['SUBMITTED', 'IN_PROCESS', 'ADDITIONAL_REVIEW', 'REVIEW_COMPLETED', 'INVALID'] as DocumentStateType[];
 
